@@ -4,7 +4,7 @@ resource "aws_lb" "test" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
-  tags = merge(local.tags, {Name = "${var.env}-alb"}
+  tags = merge(local.tags, {Name = "${var.env}-alb"})
 }
 
 resource "aws_security_group" "main" {
