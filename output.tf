@@ -1,6 +1,6 @@
-variable "alb" {
+output "alb" {
   value = aws_lb.main
 }
-variable "listener" {
+output "listener" {
   value = aws_lb_listener.main
 }
