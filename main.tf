@@ -13,6 +13,7 @@ resource "aws_lb_listener" "main" {
   port              = var.internal ? 80 : 443
   protocol          = var.internal ? "HTTP" : "HTTPS"
   ssl_policy        = var.internal ? null : "ELBSecurityPolicy-2016-08"
+  acm_certificate_arn   = var.acm_certificate_arn
 
   default_action {
     type = "fixed-response"
