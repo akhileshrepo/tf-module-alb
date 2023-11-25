@@ -7,7 +7,6 @@ resource "aws_lb" "main" {
   tags               = merge(local.tags, { Name = "${var.env}-alb" })
 }
 
-
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.internal ? 80 : 443
