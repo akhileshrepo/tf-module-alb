@@ -11,7 +11,7 @@ resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.internal ? 80 : 443
   protocol          = var.internal ? "HTTP" : "HTTPS"
-  #ssl_policy        = var.internal ? null : "ELBSecurityPolicy-2016-08"
+  ssl_policy        = var.internal ? null : "ELBSecurityPolicy-2016-08"
   certificate_arn   = var.internal ? null : var.acm_certificate_arn
 
   default_action {
@@ -25,7 +25,6 @@ resource "aws_lb_listener" "main" {
   }
 }
 
-/*
 resource "aws_lb_listener" "frontend" {
   count             = var.internal ? 0 : 1
   load_balancer_arn = aws_lb.main.arn
@@ -42,7 +41,6 @@ resource "aws_lb_listener" "frontend" {
     }
   }
 }
-*/
 
 resource "aws_security_group" "main" {
   name        = local.sg_name
