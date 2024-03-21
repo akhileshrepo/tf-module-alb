@@ -15,7 +15,7 @@ resource "aws_security_group" "main" {
   tags        = merge(local.tags, { Name = local.sg_name })
 
   ingress {
-    description = "TLS from VPC"
+    description = "APP"
     from_port   = var.sg_port
     to_port     = var.sg_port
     protocol    = "tcp"
@@ -29,5 +29,4 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
 }
