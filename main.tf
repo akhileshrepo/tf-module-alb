@@ -8,6 +8,23 @@ resource "aws_lb" "main" {
 }
 
 
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "ERROR"
+      status_code  = "404"
+    }
+  }
+}
+
+
 resource "aws_security_group" "main" {
   name        = local.sg_name
   description = local.sg_name
