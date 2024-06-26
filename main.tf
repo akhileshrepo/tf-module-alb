@@ -5,25 +5,15 @@ resource "aws_lb" "test" {
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  enable_deletion_protection = true
-
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.id
-    prefix  = "test-lb"
-    enabled = true
-  }
-
-  tags = {
-    Environment = "production"
-  }
+  tags = merge(local.tags, { Name = "${var.env}-alb" })
 }
 
 resource "aws_security_group" "main" {
-  name        = "${var.env}-alb-sg"
-  description = "${var.env}-alb-sg"
+  name        = local.sg_name
+  description = local.sg_name
   vpc_id      = var.vpc_id
 
-  tags = merge(local.tags, { Name = "${var.env}-alb-sg" })
+  tags = merge(local.tags, { Name = local.sg_name })
 
   ingress {
     description = "APP"
