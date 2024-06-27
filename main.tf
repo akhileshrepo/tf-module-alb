@@ -3,7 +3,7 @@ resource "aws_lb" "main" {
   internal           = var.internal
   load_balancer_type = var.lb_type
   security_groups    = [aws_security_group.main.id]
-  subnets            = []
+  subnets            = var.subnets
 
   tags = {
     Environment = "production"
