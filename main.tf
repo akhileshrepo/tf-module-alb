@@ -1,23 +1,26 @@
 resource "aws_lb" "main" {
-  name               = local.lb_name
+  name               = "${var.env}-alb"
   internal           = var.internal
   load_balancer_type = var.lb_type
   security_groups    = [aws_security_group.main.id]
-  subnets            = var.subnets
-  tags               = merge(local.tags, { Name = "${var.env}-alb" })
+  subnets            = []
+
+  tags = {
+    Environment = "production"
+  }
 }
 
 resource "aws_security_group" "main" {
-  name        = local.sg_name
-  description = local.sg_name
+  name        = "${var.env}-alb-sg"
+  description = "${var.env}-alb-sg"
   vpc_id      = var.vpc_id
-  tags        = merge(local.tags, { Name = local.sg_name })
+  tags = merge(local.tags, { Name = "${var.env}-alb-sg"})
 
   ingress {
     description = "APP"
-    from_port   = var.sg_port
-    to_port     = var.sg_port
-    protocol    = "tcp"
+    from_port = var.sg_port
+    to_port = var.sg_port
+    protocol = "tcp"
     cidr_blocks = var.sg_ingress_cidr
   }
 
@@ -28,4 +31,5 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
 }
