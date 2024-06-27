@@ -1,5 +1,5 @@
-variable "env" {}
 variable "tags" {}
+variable "env" {}
 variable "lb_type" {}
 variable "internal" {}
 variable "vpc_id" {}
