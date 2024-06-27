@@ -5,9 +5,7 @@ resource "aws_lb" "main" {
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  tags = {
-    Environment = "production"
-  }
+  tags = merge(local.tags, { Name = "${var.env}-alb"})
 }
 
 resource "aws_security_group" "main" {
