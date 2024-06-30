@@ -1,7 +1,7 @@
 resource "aws_lb" "main" {
   name               = local.lb_name
   internal           = var.internal
-  load_balancer_type = var.load_balancer_type
+  lb_type            = var.lb_type
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
