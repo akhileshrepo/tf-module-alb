@@ -1,11 +1,13 @@
-resource "aws_lb" "main" {
+resource "aws_lb" "test" {
   name               = local.lb_name
   internal           = var.internal
   load_balancer_type = var.lb_type
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
 
-  tags = merge(local.tags, { Name = "${var.env}-alb"})
+  tags = {
+    Environment = "production"
+  }
 }
 
 resource "aws_security_group" "main" {
